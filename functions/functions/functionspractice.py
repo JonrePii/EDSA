@@ -40,8 +40,32 @@ def date_parser(dates):
 
 ### START FUNCTION
 def extract_municipality_hashtags(df):
-    # your code here
-    return
+    municipality = []
+    hashtags = []
+
+    tweets = [i.split(" ") for i in df['Tweets']]
+
+    new_munic_list = []
+    new_tag_list = []
+
+    for tweet in tweets:
+        municipality.append([mun_dict[word] for word in tweet if word in list(mun_dict.keys())])
+        hashtags.append([tag.lower() for tag in tweet if tag.startswith('#')])
+
+    for item in municipality:
+        if item == []:
+            item = np.nan  
+        new_munic_list.append(item)
+
+    for tag in hashtags:
+        if tag == []:
+            tag = np.nan
+        new_tag_list.append(tag)
+    
+    df['municipality'] = new_munic_list
+    df['hashtags'] = new_tag_list
+    
+    return df
 
 ### END FUNCTION
 
