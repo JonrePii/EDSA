@@ -56,6 +56,7 @@ def date_parser(dates):
 #Function 4: Municipality & Hashtag Detector
 
 ### START FUNCTION
+
 def extract_municipality_hashtags(df):
     municipality = []
     hashtags = []
@@ -112,7 +113,22 @@ def word_splitter(df):
 #Function 7: Stop Words
 ### START FUNCTION
 def stop_words_remover(df):
-    # your code here
-    return
+       
+    another=[]
+    tweets=[i.lower().split(' ') for i in df['Tweets']]
+    
+
+    for i in tweets:
+        new_column=[]
+        for items in i:
+            if items not in stop_words_dict['stopwords'] :
+            
+               new_column.append(items)
+        another.append(new_column)
+
+    
+    df['Without Stop Words']=another
+    return df
+
 
 ### END FUNCTION
