@@ -1,15 +1,16 @@
 import pandas as pd
 import numpy as np
 
-#this is just a demonstration of a change
-
 #Function 1: Metric Dictionary
 
 ### START FUNCTION
+
 def dictionary_of_metrics(items):
-    """ this code calculates the mean,median,standard deviation,variance,maximum and minumum
-    of the data given as a list. It rounds the answers to 2 decimal places
- and returns the output as a dictionary"""
+
+    """ This code calculates the mean, median, standard deviation, variance, 
+    maximum and minumum of the data given as a list. It rounds the values
+    to 2 decimal places and returns the output as a dictionary. """
+
      return {'mean': round(np.mean(items), 2),
             'median': round(np.median(items), 2),
             'var': round(np.var(items, ddof=1), 2),
@@ -17,10 +18,7 @@ def dictionary_of_metrics(items):
             'min': round(np.min(items), 2),
             'max': round(np.max(items), 2)}
 
-    # your code here
-
 ### END FUNCTION
-
 
 
 #Function 2: Five Number Summary
@@ -30,7 +28,8 @@ def dictionary_of_metrics(items):
 def five_num_summary(items):
 
     """
-    The function takes a list of Gauteng data and return a dictionary of the 5 number summary.
+    The function takes a list of data and returns a dictionary of
+    the 5 number summary.
     """
     dict={'Max':round(np.max(items),2),
           'median':round(np.median(items),2),
@@ -43,17 +42,18 @@ def five_num_summary(items):
 ### END FUNCTION
 
 
-
 #Function 3: Date Parser
 
 ### START FUNCTION
-""" This function returns the number of tweets based on certain dates  """
+
 def date_parser(dates):
+
+    """ This function returns the number of tweets based on certain date. """
+
     new_list = [i[0:10] for i in dates] 
     return new_list
 
 ### END FUNCTION
-
 
 
 #Function 4: Municipality & Hashtag Detector
@@ -61,6 +61,11 @@ def date_parser(dates):
 ### START FUNCTION
 
 def extract_municipality_hashtags(df):
+
+    """ This function extracts the mentioned municipality and hashtags
+    from a dataframe of tweets. It adds 2 new columns to the dataframe
+    with the municipality mentioned and the hashtags in each tweet. """
+
     municipality = []
     hashtags = []
 
@@ -91,16 +96,19 @@ def extract_municipality_hashtags(df):
 ### END FUNCTION
 
 
-
 #Function 5: Number of Tweets per Day
 
 ### START FUNCTION
-""" This funtion groups the number of tweets accourding to thge specific date """
+
 def number_of_tweets_per_day(df):
+
+    """ This funtion groups the number of tweets accourding to the
+    specific date. """
+
     df['Date']=[i.split(' ')[0] for i in df['Date']]
     return df.groupby('Date').count()
-### END FUNCTION
 
+### END FUNCTION
 
 
 #Function 6: Word Splitter
@@ -120,8 +128,10 @@ def word_splitter(df):
 def stop_words_remover(df):
     
     """
-    The function removes a stop words from a dictionary and return a column without stop words.
-    """     
+    The function removes stop words from tweets and adds
+    a new column of tweets without stop words.
+    """    
+
     another=[]
     tweets=[i.lower().split(' ') for i in df['Tweets']]
     
@@ -137,6 +147,5 @@ def stop_words_remover(df):
     
     df['Without Stop Words']=another
     return df
-
 
 ### END FUNCTION
