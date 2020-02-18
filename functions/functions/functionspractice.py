@@ -47,9 +47,10 @@ def five_num_summary(items):
 #Function 3: Date Parser
 
 ### START FUNCTION
+""" This function returns the number of tweets based on certain dates  """
 def date_parser(dates):
-    # your code here
-    return
+    new_list = [i[0:10] for i in dates] 
+    return new_list
 
 ### END FUNCTION
 
