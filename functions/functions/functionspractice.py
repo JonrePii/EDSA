@@ -31,7 +31,7 @@ def five_num_summary(items):
     The function takes a list of data and returns a dictionary of
     the 5 number summary.
     """
-    
+
     dict={'Max':round(np.max(items),2),
           'median':round(np.median(items),2),
           'min':round(np.min(items),2),
@@ -115,9 +115,14 @@ def number_of_tweets_per_day(df):
 #Function 6: Word Splitter
 
 ### START FUNCTION
+
 def word_splitter(df):
-    # your code here
-    return
+
+    """ This funtion splits each word of a tweet and returns it in
+    a new column called Split Tweets. """
+    
+    df['Split Tweets'] = [i.lower().split(" ") for i in df['Tweets']] 
+    return df
 
 ### END FUNCTION
 
