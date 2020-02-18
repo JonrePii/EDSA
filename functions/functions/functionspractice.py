@@ -7,8 +7,17 @@ import numpy as np
 
 ### START FUNCTION
 def dictionary_of_metrics(items):
+    """ this code calculates the mean,median,standard deviation,variance,maximum and minumum
+    of the data given as a list. It rounds the answers to 2 decimal places
+ and returns the output as a dictionary"""
+     return {'mean': round(np.mean(items), 2),
+            'median': round(np.median(items), 2),
+            'var': round(np.var(items, ddof=1), 2),
+            'std': round(np.std(items, ddof=1), 2),
+            'min': round(np.min(items), 2),
+            'max': round(np.max(items), 2)}
+
     # your code here
-    return
 
 ### END FUNCTION
 
