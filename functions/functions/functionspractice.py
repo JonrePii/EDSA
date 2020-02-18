@@ -92,10 +92,10 @@ def extract_municipality_hashtags(df):
 #Function 5: Number of Tweets per Day
 
 ### START FUNCTION
+""" This funtion groups the number of tweets accourding to thge specific date """
 def number_of_tweets_per_day(df):
-    # your code here
-    return
-
+    df['Date']=[i.split(' ')[0] for i in df['Date']]
+    return df.groupby('Date').count()
 ### END FUNCTION
 
 
