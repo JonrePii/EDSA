@@ -17,6 +17,9 @@ def dictionary_of_metrics(items):
 #Function 2: Five Number Summary
 
 ### START FUNCTION
+"""
+The function takes a list of Gauteng data and return a dictionary of with keys maximum, median, minimum, first quartile and third quartile.
+"""
 def five_num_summary(items):
     dict={'Max':round(np.max(items),2),
           'median':round(np.median(items),2),
