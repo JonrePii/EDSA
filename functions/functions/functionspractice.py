@@ -18,8 +18,13 @@ def dictionary_of_metrics(items):
 
 ### START FUNCTION
 def five_num_summary(items):
-    # your code here
-    return
+    dict={'Max':round(np.max(items),2),
+          'median':round(np.median(items),2),
+          'min':round(np.min(items),2),
+          'q1':round (np.percentile(items, 25 ),2),
+          'q2':round(np.percentile(items,75),2)
+         }
+    return dict
 
 ### END FUNCTION
 
