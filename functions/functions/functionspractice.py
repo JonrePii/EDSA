@@ -7,11 +7,11 @@ import numpy as np
 
 def dictionary_of_metrics(items):
 
-    """ This code calculates the mean, median, standard deviation, variance, 
-    maximum and minumum of the data given as a list. It rounds the values
-    to 2 decimal places and returns the output as a dictionary. """
-
-     return {'mean': round(np.mean(items), 2),
+    """ The function calculates the mean, median, standard deviation,
+    variance, maximum and minimum of the data given as a list. It rounds
+    the values to 2 decimal places and returns the output as a dictionary. """
+    
+    return {'mean': round(np.mean(items), 2),
             'median': round(np.median(items), 2),
             'var': round(np.var(items, ddof=1), 2),
             'std': round(np.std(items, ddof=1), 2),
@@ -26,19 +26,16 @@ def dictionary_of_metrics(items):
 ### START FUNCTION
 
 def five_num_summary(items):
-
     """
-    The function takes a list of data and returns a dictionary of
-    the 5 number summary.
+    The function takes in a list of data and returns a dictionary
+    of the 5 number summary.
     """
-
-    dict={'Max':round(np.max(items),2),
-          'median':round(np.median(items),2),
-          'min':round(np.min(items),2),
-          'q1':round (np.percentile(items, 25 ),2),
-          'q2':round(np.percentile(items,75),2)
-         }
-    return dict
+    
+    return {'max': round(np.max(items), 2),
+            'median': round(np.median(items), 2),
+            'min': round(np.min(items), 2),
+            'q1': round(np.percentile(items, 25),2),
+            'q3': round(np.percentile(items, 75),2)}
 
 ### END FUNCTION
 
@@ -49,7 +46,10 @@ def five_num_summary(items):
 
 def date_parser(dates):
 
-    """ This function returns the number of tweets based on certain date. """
+    """ 
+    The function takes in a list of the date and time of
+    a tweet and returns only the date in "yyyy-mm-dd" format.
+    """
 
     new_list = [i[0:10] for i in dates] 
     return new_list
@@ -63,14 +63,14 @@ def date_parser(dates):
 
 def extract_municipality_hashtags(df):
 
-    """ This function extracts the mentioned municipality and hashtags
+    """ The function extracts the mentioned municipality and hashtags
     from a dataframe of tweets. It adds 2 new columns to the dataframe
     with the municipality mentioned and the hashtags in each tweet. """
 
     municipality = []
     hashtags = []
 
-    tweets = [i.split(" ") for i in df['Tweets']]
+    tweets = [i.split() for i in df['Tweets']]
 
     new_munic_list = []
     new_tag_list = []
@@ -103,10 +103,9 @@ def extract_municipality_hashtags(df):
 
 def number_of_tweets_per_day(df):
 
-    """ This funtion groups the number of tweets accourding to the
-    specific date. """
+    """ The funtion groups the number of tweets by date. """
 
-    df['Date']=[i.split(' ')[0] for i in df['Date']]
+    df['Date'] = [i.split()[0] for i in df['Date']]
     return df.groupby('Date').count()
 
 ### END FUNCTION
@@ -118,16 +117,19 @@ def number_of_tweets_per_day(df):
 
 def word_splitter(df):
 
-    """ This funtion splits each word of a tweet and returns it in
-    a new column called Split Tweets. """
+    """
+    This funtion splits each word of a tweet and returns it in
+    a new column 'Split Tweets'
+    """
     
-    df['Split Tweets'] = [i.lower().split(" ") for i in df['Tweets']] 
+    df['Split Tweets'] = [i.lower().split() for i in df['Tweets']] 
     return df
 
 ### END FUNCTION
 
 
 #Function 7: Stop Words
+
 ### START FUNCTION
 
 
@@ -138,20 +140,21 @@ def stop_words_remover(df):
     a new column of tweets without stop words.
     """    
 
-    another=[]
-    tweets=[i.lower().split() for i in df['Tweets']]
+    tweets = [i.lower().split() for i in df['Tweets']]
     
+    no_stop_words = []
 
-    for i in tweets:
-        new_column=[]
-        for items in i:
-            if items not in stop_words_dict['stopwords'] :
-            
-               new_column.append(items)
-        another.append(new_column)
+    for tweet in tweets:
+        words_list = []
+        
+        for word in tweet: 
+            if word not in stop_words_dict['stopwords']:
+                words_list.append(word)
 
-    
-    df['Without Stop Words']=another
+        no_stop_words.append(words_list)
+
+    df['Without Stop Words'] = no_stop_words
+
     return df
 
 ### END FUNCTION
