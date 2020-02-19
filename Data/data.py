@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 ebp_url = 'https://raw.githubusercontent.com/Explore-AI/Public-Data/master/Data/electrification_by_province.csv'
 ebp_df = pd.read_csv(ebp_url)
 
